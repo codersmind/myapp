@@ -259,7 +259,7 @@ function KinematicsCard({ progress }: { progress: number }) {
 export function RoboticsShowcase({ progress }: { progress: number }) {
   return (
     <div className="relative z-20 flex h-full min-h-0 w-full flex-col lg:flex-row">
-      <aside className="relative flex w-full shrink-0 flex-col justify-center border-[#d2d2d7]/50 bg-[#f5f5f7] px-6 py-10 sm:px-10 lg:w-[min(480px,44vw)] lg:max-w-[500px] lg:border-r lg:px-12 lg:py-0">
+      <aside className="relative flex w-full shrink-0 flex-col justify-start border-[#d2d2d7]/50 bg-[#f5f5f7] px-6 py-10 sm:px-10 lg:w-[min(480px,44vw)] lg:max-w-[500px] lg:border-r lg:px-12 lg:pt-20 lg:pb-12">
         <div className="mx-auto w-full max-w-md lg:mx-0">
           <p className="text-xs font-semibold tracking-wide text-[#6e6e73] md:text-sm">Robotics</p>
           <h2 className="mt-2 text-3xl font-semibold leading-[1.08] tracking-tight text-[#1d1d1f] sm:text-4xl lg:text-[2.75rem]">
@@ -278,7 +278,7 @@ export function RoboticsShowcase({ progress }: { progress: number }) {
         </div>
       </aside>
 
-      <div className="relative flex min-h-[320px] flex-1 items-center justify-center px-4 py-8 sm:px-8 lg:min-h-0 lg:px-10 lg:py-0">
+      <div className="relative flex min-h-[320px] flex-1 items-start justify-center px-4 py-8 sm:px-8 lg:min-h-0 lg:px-10 lg:pt-16 lg:pb-12">
         <KinematicsCard progress={progress} />
       </div>
     </div>

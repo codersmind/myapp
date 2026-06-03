@@ -2,7 +2,7 @@
 
 import { memo, useEffect, useState, type ComponentType } from "react";
 
-const SCENE_STEP = 0.022;
+const SCENE_STEP = 0.008;
 
 interface SceneRunnerProps {
   getProgress: () => number;

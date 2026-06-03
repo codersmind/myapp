@@ -75,7 +75,7 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
   const flash = phase(progress, 0.28, 0.55) > 0.4;
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-center lg:gap-12">
+    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-start lg:gap-12 lg:py-12">
       {/* Subtle background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -89,7 +89,7 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
       />
 
       {/* Copy — left on desktop */}
-      <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-16 md:px-12 lg:max-w-lg lg:py-0 lg:pl-16 lg:pr-0">
+      <div className="relative z-10 flex flex-1 flex-col justify-start px-6 py-14 md:px-12 lg:max-w-lg lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-0">
         <p className="text-xs font-semibold text-[#6e6e73] md:text-sm">Embedded Systems</p>
         <h2 className="mt-2 text-4xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-6xl">
           Real hardware.
@@ -125,7 +125,7 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
       </div>
 
       {/* Visual — right */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-16 lg:px-12 lg:pb-0 lg:pr-16">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-start px-6 pb-14 lg:px-12 lg:pb-8 lg:pr-16 lg:pt-8">
         <div className="w-full max-w-lg rounded-3xl border border-[#d2d2d7]/60 bg-white/90 p-8 shadow-xl shadow-black/[0.06] backdrop-blur-sm md:p-10">
           <div className="mb-6 flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#6e6e73]">ESP32 DevKit</span>

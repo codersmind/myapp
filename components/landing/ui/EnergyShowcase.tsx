@@ -141,7 +141,7 @@ export function EnergyShowcase({ progress }: { progress: number }) {
   const gridOk = phase(progress, 0.5, 0.7) > 0.5;
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-center">
+    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-start lg:py-12">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -150,7 +150,7 @@ export function EnergyShowcase({ progress }: { progress: number }) {
         aria-hidden
       />
 
-      <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-14 md:px-12 lg:max-w-md lg:py-0 lg:pl-16">
+      <div className="relative z-10 flex flex-1 flex-col justify-start px-6 py-14 md:px-12 lg:max-w-md lg:pt-16 lg:pb-8 lg:pl-16">
         <p className="text-xs font-semibold text-[#6e6e73] md:text-sm">Energy IoT</p>
         <h2 className="mt-2 text-4xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-6xl">
           Power,

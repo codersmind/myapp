@@ -8,6 +8,7 @@ import {
   SectionBody,
   FadeBlock,
 } from "../ui/StickySection";
+import { SectionContent } from "../ui/SectionContent";
 import { SectionCanvas } from "../ui/SectionCanvas";
 import { SceneRunner } from "../ui/SceneRunner";
 import { phase } from "../hooks/useSectionProgress";
@@ -50,14 +51,14 @@ export function AppleSections() {
       <HeroQuantumSection />
 
       {/* Microcontroller / Embedded — no WebGL, professional layout */}
-      <StickySection id="microcontroller" height="220vh">
+      <StickySection id="microcontroller" layout="flow">
         {(p) => <EmbeddedShowcase progress={p} />}
       </StickySection>
 
       {/* Smart Home IoT */}
       <StickySection
         id="smart-home"
-        height="300vh"
+        height="168vh"
         canvas={(getProgress) => (
           <SectionCanvas camera={[0, 1.5, 6]}>
             <SceneRunner getProgress={getProgress} Scene={SmartHomeScene} />
@@ -65,15 +66,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Smart Home</SectionEyebrow>
               <SectionTitle>Your home. Connected.</SectionTitle>
               <SectionBody>
                 Hub links thermostat, camera, lock, and sensors — each device joins the mesh as you scroll.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.35} end={0.5}>
+            <FadeBlock progress={p} start={0.22} end={0.38}>
               <SpecGrid
                 items={[
                   { label: "Devices", value: "500+ supported" },
@@ -83,12 +84,12 @@ export function AppleSections() {
                 ]}
               />
             </FadeBlock>
-            <FadeBlock progress={p} start={0.65} end={0.78} className="mt-6">
+            <FadeBlock progress={p} start={0.48} end={0.62} className="mt-6">
               <p className="text-sm font-medium text-[#1d1d1f]">
-                {phase(p, 0.5, 0.85) > 0.5 ? "All nodes linked." : "Linking nodes..."}
+                {phase(p, 0.4, 0.82) > 0.5 ? "All nodes linked." : "Linking nodes..."}
               </p>
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
@@ -96,7 +97,7 @@ export function AppleSections() {
       <StickySection
         id="industrial"
         theme="dark"
-        height="320vh"
+        height="172vh"
         canvas={(getProgress) => (
           <SectionCanvas bg="#000" camera={[0, 1.8, 7]}>
             <SceneRunner getProgress={getProgress} Scene={IndustrialScene} />
@@ -104,15 +105,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.18}>
+          <SectionContent>
+            <FadeBlock progress={p} start={0.04} end={0.16}>
               <SectionEyebrow dark>Industrial IoT</SectionEyebrow>
               <SectionTitle dark>Built for the factory floor.</SectionTitle>
               <SectionBody dark>
                 Conveyor lines, storage tanks, PLC panels, and pipe networks — animated in sequence as production comes online.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.3} end={0.45}>
+            <FadeBlock progress={p} start={0.2} end={0.34}>
               <SpecGrid
                 dark
                 items={[
@@ -123,28 +124,28 @@ export function AppleSections() {
                 ]}
               />
             </FadeBlock>
-            <FadeBlock progress={p} start={0.72} end={0.85} className="mt-6 space-y-2">
+            <FadeBlock progress={p} start={0.46} end={0.6} className="mt-6 space-y-2">
               {["Conveyor active", "Tanks monitored", "PLC synced", "Data streaming"].map((step, i) => (
                 <p
                   key={step}
                   className={`text-sm transition-opacity ${
-                    phase(p, 0.15 + i * 0.15, 0.25 + i * 0.15) > 0.5
+                    phase(p, 0.18 + i * 0.12, 0.28 + i * 0.12) > 0.5
                       ? "text-[#34c759]"
                       : "text-[#48484a]"
                   }`}
                 >
-                  {phase(p, 0.15 + i * 0.15, 0.25 + i * 0.15) > 0.5 ? "✓" : "○"} {step}
+                  {phase(p, 0.18 + i * 0.12, 0.28 + i * 0.12) > 0.5 ? "✓" : "○"} {step}
                 </p>
               ))}
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
       {/* Robotics */}
       <StickySection
         id="robotics"
-        height="320vh"
+        height="198vh"
         canvas={(getProgress) => (
           <SectionCanvas align="right" opaque camera={[1.15, 0.42, 3.6]} fov={36}>
             <SceneRunner getProgress={getProgress} Scene={RobotArmScene} />
@@ -157,7 +158,7 @@ export function AppleSections() {
       {/* Agriculture IoT */}
       <StickySection
         id="agriculture"
-        height="280vh"
+        height="165vh"
         canvas={(getProgress) => (
           <SectionCanvas camera={[0, 2, 7]}>
             <SceneRunner getProgress={getProgress} Scene={AgricultureScene} />
@@ -165,15 +166,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Agriculture IoT</SectionEyebrow>
               <SectionTitle>Crops that communicate.</SectionTitle>
               <SectionBody>
                 Soil sensors deploy across the field. Moisture, temperature, and weather data stream to your edge hub in real time.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.55} end={0.7}>
+            <FadeBlock progress={p} start={0.38} end={0.52}>
               <SpecGrid
                 items={[
                   { label: "Sensors", value: "Multi-depth probes" },
@@ -183,7 +184,7 @@ export function AppleSections() {
                 ]}
               />
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
@@ -191,7 +192,7 @@ export function AppleSections() {
       <StickySection
         id="automotive"
         theme="dark"
-        height="280vh"
+        height="165vh"
         canvas={(getProgress) => (
           <SectionCanvas bg="#000" camera={[0, 1, 7]}>
             <SceneRunner getProgress={getProgress} Scene={VehicleIoTScene} />
@@ -199,28 +200,28 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent centered>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow dark>Automotive IoT</SectionEyebrow>
               <SectionTitle dark>Every sensor. One system.</SectionTitle>
               <SectionBody dark>
                 LiDAR, radar, cameras, and CAN bus nodes scan sequentially — a complete picture of vehicle intelligence.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.5} end={0.65} className="mt-8">
+            <FadeBlock progress={p} start={0.38} end={0.52} className="mt-8">
               <p className="font-mono text-5xl font-semibold tabular-nums text-white md:text-7xl">
-                {Math.round(phase(p, 0.2, 0.85) * 100)}%
+                {Math.round(phase(p, 0.22, 0.8) * 100)}%
               </p>
               <p className="mt-2 text-sm text-[#86868b]">Sensor mesh coverage</p>
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
       {/* Healthcare IoT */}
       <StickySection
         id="healthcare"
-        height="280vh"
+        height="165vh"
         canvas={(getProgress) => (
           <SectionCanvas camera={[0, 1.2, 6]}>
             <SceneRunner getProgress={getProgress} Scene={HealthcareScene} />
@@ -228,15 +229,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Healthcare IoT</SectionEyebrow>
               <SectionTitle>Care that never sleeps.</SectionTitle>
               <SectionBody>
                 Patient monitors, wearables, and IV pumps — hospital-grade devices with live vitals streaming to edge systems.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.5} end={0.65}>
+            <FadeBlock progress={p} start={0.38} end={0.52}>
               <SpecGrid
                 items={[
                   { label: "Compliance", value: "HIPAA ready" },
@@ -246,7 +247,7 @@ export function AppleSections() {
                 ]}
               />
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
@@ -254,7 +255,7 @@ export function AppleSections() {
       <StickySection
         id="smart-city"
         theme="dark"
-        height="300vh"
+        height="170vh"
         canvas={(getProgress) => (
           <SectionCanvas bg="#000" camera={[0, 1.5, 8]}>
             <SceneRunner getProgress={getProgress} Scene={SmartCityScene} />
@@ -262,15 +263,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent centered>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow dark>Smart City</SectionEyebrow>
               <SectionTitle dark>Infrastructure that thinks.</SectionTitle>
               <SectionBody dark>
                 Traffic signals cycle, air sensors deploy, cameras mount, and LoRa antennas link — urban IoT built for scale.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.55} end={0.7} className="mt-8 flex gap-8">
+            <FadeBlock progress={p} start={0.38} end={0.54} className="mt-8 flex flex-wrap justify-center gap-6 sm:gap-8">
               {[
                 { label: "Traffic", done: phase(p, 0.18, 0.45) },
                 { label: "Air quality", done: phase(p, 0.4, 0.65) },
@@ -282,19 +283,19 @@ export function AppleSections() {
                 </div>
               ))}
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 
       {/* Smart Grid / Energy */}
-      <StickySection id="smart-grid" height="220vh">
+      <StickySection id="smart-grid" layout="flow">
         {(p) => <EnergyShowcase progress={p} />}
       </StickySection>
 
       {/* Edge ML */}
       <StickySection
         id="edge-ml"
-        height="280vh"
+        height="168vh"
         canvas={(getProgress) => (
           <SectionCanvas camera={[0, 1.2, 6]}>
             <SceneRunner getProgress={getProgress} Scene={EdgeMLScene} />
@@ -302,15 +303,15 @@ export function AppleSections() {
         )}
       >
         {(p) => (
-          <div className="flex flex-1 flex-col justify-end px-6 pb-28 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
+          <SectionContent>
+            <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Edge ML</SectionEyebrow>
               <SectionTitle>Inference where it matters.</SectionTitle>
               <SectionBody>
                 Rack-mounted edge servers compile models, run inference, and stream results — no cloud round-trip required.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.55} end={0.7}>
+            <FadeBlock progress={p} start={0.38} end={0.52}>
               <SpecGrid
                 items={[
                   { label: "Models", value: "TensorFlow · ONNX" },
@@ -320,7 +321,7 @@ export function AppleSections() {
                 ]}
               />
             </FadeBlock>
-          </div>
+          </SectionContent>
         )}
       </StickySection>
 

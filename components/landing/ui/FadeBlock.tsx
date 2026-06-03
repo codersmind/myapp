@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { phase } from "../hooks/useSectionProgress";
+import { smoothPhase } from "../hooks/useSectionProgress";
 
 interface FadeBlockProps {
   progress: number;
@@ -12,17 +12,18 @@ interface FadeBlockProps {
 }
 
 function FadeBlockInner({ progress, start, end, children, className = "" }: FadeBlockProps) {
-  const p = phase(progress, start, end);
-  const fadeOut = progress > end + 0.05 ? Math.max(0, 1 - (progress - end - 0.05) / 0.08) : 1;
-  const opacity = p * fadeOut;
+  const t = smoothPhase(progress, start, end);
+  const fadeOut =
+    progress > 0.9 ? Math.max(0, 1 - (progress - 0.9) / 0.1) : 1;
+  const opacity = t * fadeOut;
 
   return (
     <div
       className={className}
       style={{
         opacity,
-        transform: `translate3d(0, ${(1 - p) * 24}px, 0)`,
-        willChange: opacity > 0 && opacity < 1 ? "transform, opacity" : "auto",
+        transform: `translate3d(0, ${(1 - t) * 12}px, 0)`,
+        willChange: opacity > 0.02 && opacity < 0.98 ? "opacity, transform" : undefined,
       }}
     >
       {children}

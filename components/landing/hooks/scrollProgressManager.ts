@@ -46,7 +46,7 @@ class ScrollProgressManager {
         ? 0
         : Math.min(1, Math.max(0, -record.element.getBoundingClientRect().top / scrollable));
 
-    if (Math.abs(next - record.progress) < 0.0005) return;
+    if (Math.abs(next - record.progress) < 0.0015) return;
 
     record.progress = next;
     record.listeners.forEach((listener) => listener(next));
@@ -65,6 +65,7 @@ class ScrollProgressManager {
     this.listening = true;
     window.addEventListener("scroll", this.onScroll, { passive: true });
     window.addEventListener("resize", this.onScroll, { passive: true });
+    window.addEventListener("touchmove", this.onScroll, { passive: true });
   }
 
   private stopListening() {
@@ -72,6 +73,7 @@ class ScrollProgressManager {
     this.listening = false;
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onScroll);
+    window.removeEventListener("touchmove", this.onScroll);
     if (this.rafId !== null) {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;

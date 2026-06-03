@@ -32,7 +32,7 @@ function HeroScenePlaceholder() {
 export function HeroQuantumSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { progress, getProgress } = useSectionProgress("hero", ref);
-  const scrollOut = Math.min(1, progress * 1.4);
+  const scrollOut = Math.min(1, progress * 1.2);
   const [sceneReady, setSceneReady] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export function HeroQuantumSection() {
     <div
       ref={ref}
       id="hero"
-      style={{ height: "130vh", contentVisibility: "auto" }}
+      style={{ height: "118vh", contentVisibility: "auto" }}
       className="relative bg-[#f5f5f7] text-[#1d1d1f]"
     >
       <div className="relative flex min-h-[100svh] w-full flex-col overflow-hidden">
