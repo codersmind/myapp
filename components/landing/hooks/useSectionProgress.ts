@@ -59,3 +59,9 @@ export function phase(progress: number, start: number, end: number) {
   if (progress >= end) return 1;
   return (progress - start) / (end - start);
 }
+
+/** Smoothstep easing for scroll-driven motion */
+export function smoothPhase(progress: number, start: number, end: number) {
+  const t = phase(progress, start, end);
+  return t * t * (3 - 2 * t);
+}

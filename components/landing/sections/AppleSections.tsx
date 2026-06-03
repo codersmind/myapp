@@ -11,9 +11,11 @@ import {
 import { SectionCanvas } from "../ui/SectionCanvas";
 import { SceneRunner } from "../ui/SceneRunner";
 import { phase } from "../hooks/useSectionProgress";
+import { EmbeddedShowcase } from "../ui/EmbeddedShowcase";
+import { EnergyShowcase } from "../ui/EnergyShowcase";
+import { HeroQuantumSection } from "../ui/HeroQuantumSection";
+import { RoboticsShowcase } from "../ui/RoboticsShowcase";
 
-const HeroModuleScene = dynamic(() => import("../scene/HeroModule").then((m) => m.HeroModuleScene), { ssr: false });
-const MicrocontrollerScene = dynamic(() => import("../scene/MicrocontrollerScene").then((m) => m.MicrocontrollerScene), { ssr: false });
 const SmartHomeScene = dynamic(() => import("../scene/SmartHomeScene").then((m) => m.SmartHomeScene), { ssr: false });
 const IndustrialScene = dynamic(() => import("../scene/IndustrialScene").then((m) => m.IndustrialScene), { ssr: false });
 const RobotArmScene = dynamic(() => import("../scene/RobotArmScene").then((m) => m.RobotArmScene), { ssr: false });
@@ -21,7 +23,6 @@ const AgricultureScene = dynamic(() => import("../scene/AgricultureScene").then(
 const VehicleIoTScene = dynamic(() => import("../scene/VehicleIoTScene").then((m) => m.VehicleIoTScene), { ssr: false });
 const HealthcareScene = dynamic(() => import("../scene/HealthcareScene").then((m) => m.HealthcareScene), { ssr: false });
 const SmartCityScene = dynamic(() => import("../scene/SmartCityScene").then((m) => m.SmartCityScene), { ssr: false });
-const SmartGridScene = dynamic(() => import("../scene/SmartGridScene").then((m) => m.SmartGridScene), { ssr: false });
 const EdgeMLScene = dynamic(() => import("../scene/EdgeMLScene").then((m) => m.EdgeMLScene), { ssr: false });
 
 function SpecGrid({ items, dark = false }: { items: { label: string; value: string }[]; dark?: boolean }) {
@@ -45,83 +46,11 @@ function SpecGrid({ items, dark = false }: { items: { label: string; value: stri
 export function AppleSections() {
   return (
     <>
-      {/* Hero */}
-      <StickySection
-        id="hero"
-        height="220vh"
-        canvas={(getProgress) => (
-          <SectionCanvas bg="transparent">
-            <SceneRunner getProgress={getProgress} Scene={HeroModuleScene} />
-          </SectionCanvas>
-        )}
-      >
-        {(p) => (
-          <div className="flex flex-1 flex-col items-center justify-end pb-24 pt-28 text-center md:pb-32">
-            <FadeBlock progress={p} start={0} end={0.15} className="px-6">
-              <SectionEyebrow>IoT · Machine Learning · AI</SectionEyebrow>
-              <SectionTitle>
-                Intelligence at
-                <br />
-                every edge.
-              </SectionTitle>
-              <SectionBody>
-                We design connected systems that feel effortless — from silicon to software to autonomous agents.
-              </SectionBody>
-            </FadeBlock>
-            <FadeBlock progress={p} start={0.55} end={0.7} className="mt-10 px-6">
-              <p className="text-sm text-[#86868b]">Scroll to explore</p>
-              <div className="mx-auto mt-3 h-8 w-px bg-[#d2d2d7]" />
-            </FadeBlock>
-          </div>
-        )}
-      </StickySection>
+      <HeroQuantumSection />
 
-      {/* Microcontroller / Embedded */}
-      <StickySection
-        id="microcontroller"
-        height="300vh"
-        canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 1.5, 5.5]}>
-            <SceneRunner getProgress={getProgress} Scene={MicrocontrollerScene} />
-          </SectionCanvas>
-        )}
-      >
-        {(p) => (
-          <div className="flex flex-1 flex-col items-end justify-center px-6 text-right md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2} className="max-w-xl">
-              <SectionEyebrow>Embedded Systems</SectionEyebrow>
-              <SectionTitle>Real hardware. Real firmware.</SectionTitle>
-              <SectionBody>
-                ESP32-class board with USB, pin headers, MCU, and breadboard wiring — LED flashes, pins activate, and sensors connect as you scroll.
-              </SectionBody>
-            </FadeBlock>
-            <FadeBlock progress={p} start={0.35} end={0.5} className="mt-8 max-w-sm">
-              <SpecGrid
-                items={[
-                  { label: "MCU", value: "ESP32-WROOM" },
-                  { label: "GPIO", value: "30 pins" },
-                  { label: "Flash", value: "4 MB" },
-                  { label: "Wireless", value: "WiFi · BLE" },
-                ]}
-              />
-            </FadeBlock>
-            <FadeBlock progress={p} start={0.65} end={0.78} className="mt-6 space-y-2 text-left">
-              {[
-                { label: "Power on", at: 0.25 },
-                { label: "Firmware flash", at: 0.45 },
-                { label: "Pin headers live", at: 0.6 },
-                { label: "Sensor linked", at: 0.8 },
-              ].map(({ label, at }) => (
-                <p
-                  key={label}
-                  className={`text-sm ${phase(p, at, at + 0.08) > 0.5 ? "text-[#1d1d1f]" : "text-[#86868b]"}`}
-                >
-                  {phase(p, at, at + 0.08) > 0.5 ? "✓" : "○"} {label}
-                </p>
-              ))}
-            </FadeBlock>
-          </div>
-        )}
+      {/* Microcontroller / Embedded — no WebGL, professional layout */}
+      <StickySection id="microcontroller" height="220vh">
+        {(p) => <EmbeddedShowcase progress={p} />}
       </StickySection>
 
       {/* Smart Home IoT */}
@@ -214,35 +143,14 @@ export function AppleSections() {
       {/* Robotics */}
       <StickySection
         id="robotics"
-        height="300vh"
+        height="320vh"
         canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 0.5, 6]}>
+          <SectionCanvas align="right" opaque camera={[1.15, 0.42, 3.6]} fov={36}>
             <SceneRunner getProgress={getProgress} Scene={RobotArmScene} />
           </SectionCanvas>
         )}
       >
-        {(p) => (
-          <div className="flex flex-1 flex-col items-end justify-center px-6 text-right md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2} className="max-w-xl">
-              <SectionEyebrow>Robotics</SectionEyebrow>
-              <SectionTitle>Precision in motion.</SectionTitle>
-              <SectionBody>
-                Six-axis arm assembles, reaches, picks, and places — every joint driven by scroll progress and real-time control logic.
-              </SectionBody>
-            </FadeBlock>
-            <FadeBlock progress={p} start={0.45} end={0.6} className="mt-8 max-w-sm">
-              <div className="rounded-2xl bg-white/70 p-5 text-left backdrop-blur-md">
-                <p className="text-xs font-semibold text-[#6e6e73]">Motion sequence</p>
-                <div className="mt-3 space-y-2 text-sm text-[#1d1d1f]">
-                  <p className={phase(p, 0, 0.3) > 0.8 ? "opacity-100" : "opacity-40"}>1. Assemble arm</p>
-                  <p className={phase(p, 0.25, 0.55) > 0.5 ? "opacity-100" : "opacity-40"}>2. Reach target</p>
-                  <p className={phase(p, 0.5, 0.75) > 0.5 ? "opacity-100" : "opacity-40"}>3. Grip object</p>
-                  <p className={phase(p, 0.72, 1) > 0.3 ? "opacity-100" : "opacity-40"}>4. Place on belt</p>
-                </div>
-              </div>
-            </FadeBlock>
-          </div>
-        )}
+        {(p) => <RoboticsShowcase progress={p} />}
       </StickySection>
 
       {/* Agriculture IoT */}
@@ -378,36 +286,8 @@ export function AppleSections() {
       </StickySection>
 
       {/* Smart Grid / Energy */}
-      <StickySection
-        id="smart-grid"
-        height="280vh"
-        canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 1.8, 7]}>
-            <SceneRunner getProgress={getProgress} Scene={SmartGridScene} />
-          </SectionCanvas>
-        )}
-      >
-        {(p) => (
-          <div className="flex flex-1 flex-col justify-end px-6 pb-28 md:px-16 lg:px-24">
-            <FadeBlock progress={p} start={0.05} end={0.2}>
-              <SectionEyebrow>Energy IoT</SectionEyebrow>
-              <SectionTitle>Power, measured.</SectionTitle>
-              <SectionBody>
-                Solar arrays, substation transformers, smart meters, and live power flow — renewable energy managed at the edge.
-              </SectionBody>
-            </FadeBlock>
-            <FadeBlock progress={p} start={0.55} end={0.7}>
-              <SpecGrid
-                items={[
-                  { label: "Solar", value: "MPPT tracking" },
-                  { label: "Grid", value: "IEC 61850" },
-                  { label: "Metering", value: "Real-time kWh" },
-                  { label: "Storage", value: "Battery BMS" },
-                ]}
-              />
-            </FadeBlock>
-          </div>
-        )}
+      <StickySection id="smart-grid" height="220vh">
+        {(p) => <EnergyShowcase progress={p} />}
       </StickySection>
 
       {/* Edge ML */}
