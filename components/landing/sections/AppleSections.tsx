@@ -15,6 +15,7 @@ import { EmbeddedShowcase } from "../ui/EmbeddedShowcase";
 import { EnergyShowcase } from "../ui/EnergyShowcase";
 import { HeroQuantumSection } from "../ui/HeroQuantumSection";
 import { RoboticsShowcase } from "../ui/RoboticsShowcase";
+import { PlaygroundSection } from "../playground/PlaygroundSection";
 
 const SmartHomeScene = dynamic(() => import("../scene/SmartHomeScene").then((m) => m.SmartHomeScene), { ssr: false });
 const IndustrialScene = dynamic(() => import("../scene/IndustrialScene").then((m) => m.IndustrialScene), { ssr: false });
@@ -347,6 +348,8 @@ export function AppleSections() {
           </pre>
         </div>
       </section>
+
+      <PlaygroundSection />
 
       {/* CTA */}
       <section id="contact" className="bg-[#f5f5f7] px-6 py-32 text-center md:py-44">

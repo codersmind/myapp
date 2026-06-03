@@ -9,6 +9,7 @@ export function Navbar() {
     { href: "#healthcare", label: "Healthcare" },
     { href: "#smart-city", label: "Smart City" },
     { href: "#smart-grid", label: "Energy" },
+    { href: "#playground", label: "Playground" },
   ];
 
   return (
