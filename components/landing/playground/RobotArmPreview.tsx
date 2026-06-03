@@ -8,8 +8,8 @@ export function RobotArmPreview({ state }: { state: RobotSimState }) {
   return (
     <div className="flex flex-col items-center gap-4">
       <svg
-        viewBox="-50 -150 480 430"
-        className="h-[280px] w-full max-w-[400px]"
+        viewBox="-50 -220 480 460"
+        className="h-[min(52vh,480px)] w-full min-h-[360px] max-w-[560px]"
         aria-label="Robot arm simulation preview"
       >
         <defs>
@@ -18,8 +18,8 @@ export function RobotArmPreview({ state }: { state: RobotSimState }) {
             <stop offset="100%" stopColor="#aeaeb2" />
           </linearGradient>
         </defs>
-        <rect x="24" y="218" width="312" height="10" rx="3" fill="#d2d2d7" />
-        <g transform={`translate(88 218) scale(1.75)`}>
+        <rect x="24" y="228" width="312" height="10" rx="3" fill="#d2d2d7" />
+        <g transform={`translate(88 228) scale(2.35)`}>
           <rect x="-22" y="-14" width="44" height="16" rx="4" fill="#1d1d1f" />
           <g transform={`rotate(${j1} 0 -10)`}>
             <rect x="0" y="-72" width="16" height="72" rx="5" fill="url(#pg-arm-metal)" />
