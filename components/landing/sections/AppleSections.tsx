@@ -1,0 +1,345 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import {
+  StickySection,
+  SectionEyebrow,
+  SectionTitle,
+  SectionBody,
+  FadeBlock,
+} from "../ui/StickySection";
+import { SectionCanvas } from "../ui/SectionCanvas";
+import { phase } from "../hooks/useSectionProgress";
+
+const HeroModuleScene = dynamic(() => import("../scene/HeroModule").then((m) => m.HeroModuleScene), { ssr: false });
+const SmartHomeScene = dynamic(() => import("../scene/SmartHomeScene").then((m) => m.SmartHomeScene), { ssr: false });
+const IndustrialScene = dynamic(() => import("../scene/IndustrialScene").then((m) => m.IndustrialScene), { ssr: false });
+const RobotArmScene = dynamic(() => import("../scene/RobotArmScene").then((m) => m.RobotArmScene), { ssr: false });
+const AgricultureScene = dynamic(() => import("../scene/AgricultureScene").then((m) => m.AgricultureScene), { ssr: false });
+const VehicleIoTScene = dynamic(() => import("../scene/VehicleIoTScene").then((m) => m.VehicleIoTScene), { ssr: false });
+const EdgeMLScene = dynamic(() => import("../scene/EdgeMLScene").then((m) => m.EdgeMLScene), { ssr: false });
+
+function SpecGrid({ items, dark = false }: { items: { label: string; value: string }[]; dark?: boolean }) {
+  return (
+    <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[#d2d2d7]/40 md:grid-cols-4">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className={`px-5 py-4 ${dark ? "bg-[#1d1d1f]" : "bg-white/80 backdrop-blur-sm"}`}
+        >
+          <p className={`text-xs ${dark ? "text-[#86868b]" : "text-[#6e6e73]"}`}>{item.label}</p>
+          <p className={`mt-1 text-sm font-semibold md:text-base ${dark ? "text-white" : "text-[#1d1d1f]"}`}>
+            {item.value}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function AppleSections() {
+  return (
+    <>
+      {/* Hero */}
+      <StickySection
+        id="hero"
+        height="220vh"
+        canvas={(p) => (
+          <SectionCanvas bg="transparent">
+            <HeroModuleScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col items-center justify-end pb-24 pt-28 text-center md:pb-32">
+            <FadeBlock progress={p} start={0} end={0.15} className="px-6">
+              <SectionEyebrow>IoT · Machine Learning · AI</SectionEyebrow>
+              <SectionTitle>
+                Intelligence at
+                <br />
+                every edge.
+              </SectionTitle>
+              <SectionBody>
+                We design connected systems that feel effortless — from silicon to software to autonomous agents.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.55} end={0.7} className="mt-10 px-6">
+              <p className="text-sm text-[#86868b]">Scroll to explore</p>
+              <div className="mx-auto mt-3 h-8 w-px bg-[#d2d2d7]" />
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Smart Home IoT */}
+      <StickySection
+        id="smart-home"
+        height="300vh"
+        canvas={(p) => (
+          <SectionCanvas camera={[0, 1.5, 6]}>
+            <SmartHomeScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
+            <FadeBlock progress={p} start={0.05} end={0.2}>
+              <SectionEyebrow>Smart Home</SectionEyebrow>
+              <SectionTitle>Your home. Connected.</SectionTitle>
+              <SectionBody>
+                Hub links thermostat, camera, lock, and sensors — each device joins the mesh as you scroll.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.35} end={0.5}>
+              <SpecGrid
+                items={[
+                  { label: "Devices", value: "500+ supported" },
+                  { label: "Latency", value: "< 12 ms" },
+                  { label: "Protocol", value: "MQTT · Zigbee" },
+                  { label: "Security", value: "E2E encrypted" },
+                ]}
+              />
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.65} end={0.78} className="mt-6">
+              <p className="text-sm font-medium text-[#1d1d1f]">
+                {phase(p, 0.5, 0.85) > 0.5 ? "All nodes linked." : "Linking nodes..."}
+              </p>
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Industrial IoT */}
+      <StickySection
+        id="industrial"
+        theme="dark"
+        height="320vh"
+        canvas={(p) => (
+          <SectionCanvas bg="#000" camera={[0, 1.8, 7]}>
+            <IndustrialScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
+            <FadeBlock progress={p} start={0.05} end={0.18}>
+              <SectionEyebrow dark>Industrial IoT</SectionEyebrow>
+              <SectionTitle dark>Built for the factory floor.</SectionTitle>
+              <SectionBody dark>
+                Conveyor lines, storage tanks, PLC panels, and pipe networks — animated in sequence as production comes online.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.3} end={0.45}>
+              <SpecGrid
+                dark
+                items={[
+                  { label: "Uptime", value: "99.97%" },
+                  { label: "PLC", value: "Modbus · OPC-UA" },
+                  { label: "Throughput", value: "10K events/s" },
+                  { label: "Predictive", value: "ML maintenance" },
+                ]}
+              />
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.72} end={0.85} className="mt-6 space-y-2">
+              {["Conveyor active", "Tanks monitored", "PLC synced", "Data streaming"].map((step, i) => (
+                <p
+                  key={step}
+                  className={`text-sm transition-opacity ${
+                    phase(p, 0.15 + i * 0.15, 0.25 + i * 0.15) > 0.5
+                      ? "text-[#34c759]"
+                      : "text-[#48484a]"
+                  }`}
+                >
+                  {phase(p, 0.15 + i * 0.15, 0.25 + i * 0.15) > 0.5 ? "✓" : "○"} {step}
+                </p>
+              ))}
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Robotics */}
+      <StickySection
+        id="robotics"
+        height="300vh"
+        canvas={(p) => (
+          <SectionCanvas camera={[0, 0.5, 6]}>
+            <RobotArmScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col items-end justify-center px-6 text-right md:px-16 lg:px-24">
+            <FadeBlock progress={p} start={0.05} end={0.2} className="max-w-xl">
+              <SectionEyebrow>Robotics</SectionEyebrow>
+              <SectionTitle>Precision in motion.</SectionTitle>
+              <SectionBody>
+                Six-axis arm assembles, reaches, picks, and places — every joint driven by scroll progress and real-time control logic.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.45} end={0.6} className="mt-8 max-w-sm">
+              <div className="rounded-2xl bg-white/70 p-5 text-left backdrop-blur-md">
+                <p className="text-xs font-semibold text-[#6e6e73]">Motion sequence</p>
+                <div className="mt-3 space-y-2 text-sm text-[#1d1d1f]">
+                  <p className={phase(p, 0, 0.3) > 0.8 ? "opacity-100" : "opacity-40"}>1. Assemble arm</p>
+                  <p className={phase(p, 0.25, 0.55) > 0.5 ? "opacity-100" : "opacity-40"}>2. Reach target</p>
+                  <p className={phase(p, 0.5, 0.75) > 0.5 ? "opacity-100" : "opacity-40"}>3. Grip object</p>
+                  <p className={phase(p, 0.72, 1) > 0.3 ? "opacity-100" : "opacity-40"}>4. Place on belt</p>
+                </div>
+              </div>
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Agriculture IoT */}
+      <StickySection
+        id="agriculture"
+        height="280vh"
+        canvas={(p) => (
+          <SectionCanvas camera={[0, 2, 7]}>
+            <AgricultureScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col justify-center px-6 md:px-16 lg:px-24">
+            <FadeBlock progress={p} start={0.05} end={0.2}>
+              <SectionEyebrow>Agriculture IoT</SectionEyebrow>
+              <SectionTitle>Crops that communicate.</SectionTitle>
+              <SectionBody>
+                Soil sensors deploy across the field. Moisture, temperature, and weather data stream to your edge hub in real time.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.55} end={0.7}>
+              <SpecGrid
+                items={[
+                  { label: "Sensors", value: "Multi-depth probes" },
+                  { label: "Coverage", value: "400 acres" },
+                  { label: "Irrigation", value: "Auto-triggered" },
+                  { label: "Yield boost", value: "+18% avg" },
+                ]}
+              />
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Automotive IoT */}
+      <StickySection
+        id="automotive"
+        theme="dark"
+        height="280vh"
+        canvas={(p) => (
+          <SectionCanvas bg="#000" camera={[0, 1, 7]}>
+            <VehicleIoTScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+            <FadeBlock progress={p} start={0.05} end={0.2}>
+              <SectionEyebrow dark>Automotive IoT</SectionEyebrow>
+              <SectionTitle dark>Every sensor. One system.</SectionTitle>
+              <SectionBody dark>
+                LiDAR, radar, cameras, and CAN bus nodes scan sequentially — a complete picture of vehicle intelligence.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.5} end={0.65} className="mt-8">
+              <p className="font-mono text-5xl font-semibold tabular-nums text-white md:text-7xl">
+                {Math.round(phase(p, 0.2, 0.85) * 100)}%
+              </p>
+              <p className="mt-2 text-sm text-[#86868b]">Sensor mesh coverage</p>
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* Edge ML */}
+      <StickySection
+        id="edge-ml"
+        height="280vh"
+        canvas={(p) => (
+          <SectionCanvas camera={[0, 1.2, 6]}>
+            <EdgeMLScene progress={p} />
+          </SectionCanvas>
+        )}
+      >
+        {(p) => (
+          <div className="flex flex-1 flex-col justify-end px-6 pb-28 md:px-16 lg:px-24">
+            <FadeBlock progress={p} start={0.05} end={0.2}>
+              <SectionEyebrow>Edge ML</SectionEyebrow>
+              <SectionTitle>Inference where it matters.</SectionTitle>
+              <SectionBody>
+                Rack-mounted edge servers compile models, run inference, and stream results — no cloud round-trip required.
+              </SectionBody>
+            </FadeBlock>
+            <FadeBlock progress={p} start={0.55} end={0.7}>
+              <SpecGrid
+                items={[
+                  { label: "Models", value: "TensorFlow · ONNX" },
+                  { label: "Inference", value: "< 4 ms" },
+                  { label: "Power", value: "15W TDP" },
+                  { label: "Offline", value: "Full autonomy" },
+                ]}
+              />
+            </FadeBlock>
+          </div>
+        )}
+      </StickySection>
+
+      {/* AI Agents - text only section, Apple style */}
+      <section id="ai-agents" className="bg-black px-6 py-32 text-center md:px-16 lg:py-44">
+        <SectionEyebrow dark>AI Agents</SectionEyebrow>
+        <SectionTitle dark>
+          Software that
+          <br />
+          decides for itself.
+        </SectionTitle>
+        <SectionBody dark>
+          Autonomous agents monitor streams, branch on conditions, and dispatch actions — like assembly code with intent.
+        </SectionBody>
+        <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-2xl border border-[#424245] bg-[#1d1d1f] text-left">
+          <div className="border-b border-[#424245] px-4 py-2 text-xs text-[#86868b]">agent.runtime</div>
+          <pre className="overflow-x-auto p-6 font-mono text-xs leading-relaxed text-[#a1a1a6] md:text-sm">
+{`if (sensor.temp > threshold) {
+  agent.dispatch("cooling", { zone: 3 });
+} else if (anomaly.score > 0.92) {
+  agent.escalate("maintenance");
+} else {
+  agent.standby();
+}`}
+          </pre>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section id="contact" className="bg-[#f5f5f7] px-6 py-32 text-center md:py-44">
+        <SectionEyebrow>Get started</SectionEyebrow>
+        <SectionTitle>
+          Ready to build
+          <br />
+          something brilliant?
+        </SectionTitle>
+        <SectionBody>
+          From smart homes to factory floors to autonomous fleets — we engineer the full IoT and AI stack.
+        </SectionBody>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="mailto:hello@nexedge.io"
+            className="rounded-full bg-[#0071e3] px-8 py-3 text-sm font-medium text-white transition-opacity hover:opacity-85"
+          >
+            Contact us
+          </a>
+          <a
+            href="#hero"
+            className="rounded-full border border-[#d2d2d7] px-8 py-3 text-sm font-medium text-[#0071e3] transition-colors hover:bg-white"
+          >
+            Learn more
+          </a>
+        </div>
+        <p className="mt-20 text-xs text-[#86868b]">© 2026 NexEdge Systems. All rights reserved.</p>
+      </section>
+    </>
+  );
+}
