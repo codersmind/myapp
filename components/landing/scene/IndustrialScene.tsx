@@ -11,6 +11,9 @@ import { phase } from "../hooks/useSectionProgress";
 export function IndustrialScene({ progress }: { progress: number }) {
   const conveyorRef = useRef<THREE.Group>(null);
   const beltRef = useRef<THREE.Mesh>(null);
+  const pulseRef = useRef<THREE.Mesh>(null);
+  const progressRef = useRef(progress);
+  progressRef.current = progress;
 
   const lineReveal = phase(progress, 0, 0.25);
   const tankReveal = phase(progress, 0.2, 0.45);
@@ -19,12 +22,19 @@ export function IndustrialScene({ progress }: { progress: number }) {
   const dataFlow = phase(progress, 0.7, 1);
 
   useFrame((state) => {
+    const flow = phase(progressRef.current, 0.7, 1);
     if (beltRef.current && lineReveal > 0.5) {
       beltRef.current.position.x = ((state.clock.elapsedTime * 0.8) % 2) - 1;
     }
     if (conveyorRef.current) {
       conveyorRef.current.visible = lineReveal > 0.05;
       conveyorRef.current.scale.setScalar(0.5 + lineReveal * 0.5);
+    }
+    if (pulseRef.current) {
+      pulseRef.current.visible = flow > 0.1;
+      if (flow > 0.1) {
+        pulseRef.current.position.x = Math.sin(state.clock.elapsedTime * 3) * 2;
+      }
     }
   });
 
@@ -103,13 +113,10 @@ export function IndustrialScene({ progress }: { progress: number }) {
           </group>
         )}
 
-        {/* Data pulse on conveyor */}
-        {dataFlow > 0.1 && (
-          <mesh position={[Math.sin(Date.now() * 0.003) * 2, 0.25, 0]}>
-            <sphereGeometry args={[0.07, 10, 10]} />
-            <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.6} />
-          </mesh>
-        )}
+        <mesh ref={pulseRef} position={[0, 0.25, 0]} visible={false}>
+          <sphereGeometry args={[0.07, 10, 10]} />
+          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.6} />
+        </mesh>
       </group>
     </>
   );

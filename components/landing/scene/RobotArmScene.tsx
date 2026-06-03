@@ -4,99 +4,94 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { StudioLights } from "./StudioLights";
-import { appleAluminum, appleDark } from "./materials";
+import { IndustrialRobot } from "./parts/IndustrialRobot";
 import { phase } from "../hooks/useSectionProgress";
 
-function ArmSegment({
-  length,
-  children,
-  angle,
-}: {
-  length: number;
-  children?: React.ReactNode;
-  angle: number;
-}) {
-  return (
-    <group rotation={[0, 0, angle]}>
-      <mesh position={[length / 2, 0, 0]} castShadow>
-        <boxGeometry args={[length, 0.18, 0.18]} />
-        <meshStandardMaterial color="#86868b" metalness={0.85} roughness={0.2} />
-      </mesh>
-      <group position={[length, 0, 0]}>{children}</group>
-    </group>
-  );
-}
-
 export function RobotArmScene({ progress }: { progress: number }) {
-  const baseRef = useRef<THREE.Group>(null);
-  const gripRef = useRef<THREE.Group>(null);
+  const robotRef = useRef<THREE.Group>(null);
 
-  const assemble = phase(progress, 0, 0.3);
-  const reach = phase(progress, 0.25, 0.55);
-  const pick = phase(progress, 0.5, 0.75);
-  const place = phase(progress, 0.72, 1);
+  const assemble = phase(progress, 0, 0.25);
+  const reach = phase(progress, 0.22, 0.52);
+  const pick = phase(progress, 0.48, 0.72);
+  const place = phase(progress, 0.68, 1);
+
+  const j1 = -0.6 + reach * 1.1 + place * 0.3;
+  const j2 = -0.55 - reach * 0.65 + pick * 0.35;
+  const j3 = 0.85 + reach * 0.4 - pick * 0.5 + place * 0.2;
+  const j5 = 0.2 + pick * 0.45 - place * 0.25;
+  const gripOpen = pick > 0.55 && place < 0.5 ? 0.1 : 0.55;
 
   useFrame(() => {
-    if (!baseRef.current || !gripRef.current) return;
-    baseRef.current.rotation.y = -0.5 + reach * 0.9 + place * 0.4;
-    baseRef.current.scale.setScalar(0.4 + assemble * 0.6);
-    gripRef.current.rotation.z = pick * 0.6 - place * 0.4;
+    if (robotRef.current) {
+      robotRef.current.scale.setScalar(0.35 + assemble * 0.65);
+    }
   });
-
-  const j1 = reach * 0.5;
-  const j2 = -0.3 - reach * 0.8 + pick * 0.5;
-  const j3 = 0.4 + pick * 0.6 - place * 0.3;
 
   return (
     <>
-      <StudioLights intensity={1} />
-      <group position={[0, -1.2, 0]}>
-        {/* Base platform */}
-        <mesh receiveShadow>
-          <cylinderGeometry args={[0.8, 0.9, 0.2, 32]} />
-          <meshStandardMaterial color="#1d1d1f" metalness={0.8} roughness={0.3} />
+      <StudioLights intensity={1.1} />
+      <group position={[0, -1.35, 0]}>
+        {/* Factory floor plate */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
+          <planeGeometry args={[8, 6]} />
+          <meshStandardMaterial color="#e8e8ed" roughness={0.85} metalness={0.1} />
+        </mesh>
+        {/* Safety line */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[1.8, 0.002, 0]}>
+          <planeGeometry args={[0.08, 4]} />
+          <meshStandardMaterial color="#ff9500" roughness={0.7} />
         </mesh>
 
-        <group ref={baseRef} position={[0, 0.15, 0]}>
-          <mesh castShadow>
-            <cylinderGeometry args={[0.35, 0.4, 0.35, 24]} />
-            <meshStandardMaterial color="#d2d2d7" metalness={0.9} roughness={0.2} />
-          </mesh>
-
-          <group position={[0, 0.25, 0]} rotation={[0, j1, 0]}>
-            <ArmSegment length={0.9} angle={j2}>
-              <ArmSegment length={0.75} angle={j3}>
-                <group ref={gripRef}>
-                  <mesh castShadow material={appleDark}>
-                    <boxGeometry args={[0.2, 0.12, 0.25]} />
-                  </mesh>
-                  <mesh position={[0.12, 0, 0.08]} material={appleAluminum}>
-                    <boxGeometry args={[0.06, 0.04, 0.12]} />
-                  </mesh>
-                  <mesh position={[0.12, 0, -0.08]} material={appleAluminum}>
-                    <boxGeometry args={[0.06, 0.04, 0.12]} />
-                  </mesh>
-                  {pick > 0.4 && (
-                    <mesh position={[0.2, -0.15, 0]} scale={1 - place * 0.8}>
-                      <boxGeometry args={[0.22, 0.22, 0.22]} />
-                      <meshStandardMaterial color="#6e6e73" metalness={0.5} roughness={0.4} />
-                    </mesh>
-                  )}
-                </group>
-              </ArmSegment>
-            </ArmSegment>
-          </group>
+        <group ref={robotRef}>
+          <IndustrialRobot
+            j1={j1}
+            j2={j2}
+            j3={j3}
+            j4={pick * 0.3}
+            j5={j5}
+            j6={place * 0.2}
+            gripOpen={gripOpen}
+            scale={1.15}
+          />
         </group>
 
-        {/* Conveyor strip */}
-        <mesh position={[1.5, 0, 0.8]} receiveShadow>
-          <boxGeometry args={[2.5, 0.08, 0.7]} />
-          <meshStandardMaterial color="#3a3a3c" metalness={0.5} roughness={0.45} />
-        </mesh>
-        <mesh position={[1.8, 0.15, 0.8]} scale={pick > 0.6 ? 1 - place : 1}>
-          <boxGeometry args={[0.25, 0.25, 0.25]} />
-          <meshStandardMaterial color="#86868b" metalness={0.6} roughness={0.35} />
-        </mesh>
+        {/* Conveyor with realistic rollers */}
+        <group position={[2.2, 0.06, 0.6]}>
+          <mesh receiveShadow>
+            <boxGeometry args={[3, 0.1, 0.75]} />
+            <meshStandardMaterial color="#48484a" metalness={0.6} roughness={0.4} />
+          </mesh>
+          {[-1.2, -0.4, 0.4, 1.2].map((x, i) => (
+            <mesh key={i} position={[x, 0.02, 0]} rotation={[0, 0, Math.PI / 2]}>
+              <cylinderGeometry args={[0.06, 0.06, 0.78, 16]} />
+              <meshStandardMaterial color="#86868b" metalness={0.85} roughness={0.2} />
+            </mesh>
+          ))}
+          {/* Workpiece */}
+          <mesh
+            position={[1.3 - place * 0.8, 0.18, 0]}
+            scale={pick > 0.5 && place < 0.4 ? 0.01 : 1}
+          >
+            <boxGeometry args={[0.28, 0.12, 0.28]} />
+            <meshStandardMaterial color="#d2d2d7" metalness={0.7} roughness={0.25} />
+          </mesh>
+        </group>
+
+        {/* Control cabinet */}
+        <group position={[-2.2, 0.5, -0.8]} rotation={[0, 0.35, 0]}>
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[0.6, 1.2, 0.45]} />
+            <meshStandardMaterial color="#86868b" metalness={0.75} roughness={0.3} />
+          </mesh>
+          <mesh position={[0, 0.2, 0.24]}>
+            <boxGeometry args={[0.4, 0.35, 0.02]} />
+            <meshStandardMaterial
+              color="#1d1d1f"
+              emissive="#34c759"
+              emissiveIntensity={0.1 + reach * 0.2}
+            />
+          </mesh>
+        </group>
       </group>
     </>
   );

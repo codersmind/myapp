@@ -1,34 +1,57 @@
 "use client";
 
-import { useEffect, useState, type RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
+import { scrollProgressManager } from "./scrollProgressManager";
 
-export function useSectionProgress(ref: RefObject<HTMLElement | null>) {
+const UI_FRAME_MS = 48;
+
+export function useSectionProgress(id: string, ref: RefObject<HTMLElement | null>) {
   const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState(false);
+  const lastUiSync = useRef(0);
+  const latestProgress = useRef(0);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const element = ref.current;
+    if (!element) return;
 
-    const update = () => {
-      const rect = el.getBoundingClientRect();
-      const scrollable = el.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) {
-        setProgress(0);
-        return;
+    const unsubscribe = scrollProgressManager.register(id, element, (value) => {
+      latestProgress.current = value;
+      const now = performance.now();
+      if (now - lastUiSync.current >= UI_FRAME_MS) {
+        lastUiSync.current = now;
+        setProgress(value);
       }
-      setProgress(Math.min(1, Math.max(0, -rect.top / scrollable)));
-    };
+    });
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
+    let scrollEndTimer: ReturnType<typeof setTimeout>;
+    const onScrollEnd = () => {
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = setTimeout(() => {
+        setProgress(latestProgress.current);
+      }, 80);
+    };
+    window.addEventListener("scroll", onScrollEnd, { passive: true });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { rootMargin: "120px 0px", threshold: 0 }
+    );
+    observer.observe(element);
+
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      unsubscribe();
+      observer.disconnect();
+      clearTimeout(scrollEndTimer);
+      window.removeEventListener("scroll", onScrollEnd);
     };
-  }, [ref]);
+  }, [id, ref]);
 
-  return progress;
+  const getProgress = useCallback(() => {
+    return scrollProgressManager.getProgress(id);
+  }, [id]);
+
+  return { progress, getProgress, active, latestProgress };
 }
 
 export function phase(progress: number, start: number, end: number) {

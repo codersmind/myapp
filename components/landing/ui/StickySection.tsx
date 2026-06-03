@@ -12,7 +12,7 @@ interface StickySectionProps {
   height?: string;
   theme?: Theme;
   children: (progress: number) => React.ReactNode;
-  canvas?: (progress: number) => React.ReactNode;
+  canvas?: (getProgress: () => number) => React.ReactNode;
 }
 
 export function StickySection({
@@ -23,19 +23,19 @@ export function StickySection({
   canvas,
 }: StickySectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const progress = useSectionProgress(ref);
+  const { progress, getProgress, active } = useSectionProgress(id, ref);
   const isDark = theme === "dark";
 
   return (
     <div
       ref={ref}
       id={id}
-      style={{ height }}
+      style={{ height, contentVisibility: "auto", containIntrinsicSize: "0 100vh" }}
       className={isDark ? "bg-black text-white" : "bg-[#f5f5f7] text-[#1d1d1f]"}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {canvas?.(progress)}
-        <div className="relative z-10 flex h-full flex-col">{children(progress)}</div>
+        {active && canvas?.(getProgress)}
+        <div className="relative z-10 flex h-full flex-col will-change-transform">{children(progress)}</div>
       </div>
     </div>
   );
@@ -76,4 +76,3 @@ export function SectionBody({ children, dark = false }: { children: React.ReactN
     </p>
   );
 }
-
