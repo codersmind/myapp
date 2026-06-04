@@ -29,14 +29,14 @@ const EdgeMLScene = dynamic(() => import("../scene/EdgeMLScene").then((m) => m.E
 
 function SpecGrid({ items, dark = false }: { items: { label: string; value: string }[]; dark?: boolean }) {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[#d2d2d7]/40 md:grid-cols-4">
+    <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[#d2d2d7]/40 sm:mt-8 md:grid-cols-4">
       {items.map((item) => (
         <div
           key={item.label}
-          className={`px-5 py-4 ${dark ? "bg-[#1d1d1f]" : "bg-white/80 backdrop-blur-sm"}`}
+          className={`px-3 py-3 sm:px-4 sm:py-4 md:px-5 md:py-4 ${dark ? "bg-[#1d1d1f]" : "bg-white lg:bg-white/95 lg:backdrop-blur-sm"}`}
         >
-          <p className={`text-xs ${dark ? "text-[#86868b]" : "text-[#6e6e73]"}`}>{item.label}</p>
-          <p className={`mt-1 text-sm font-semibold md:text-base ${dark ? "text-white" : "text-[#1d1d1f]"}`}>
+          <p className={`text-[10px] sm:text-xs ${dark ? "text-[#86868b]" : "text-[#6e6e73]"}`}>{item.label}</p>
+          <p className={`mt-1 text-xs font-semibold sm:text-sm md:text-base ${dark ? "text-white" : "text-[#1d1d1f]"}`}>
             {item.value}
           </p>
         </div>
@@ -60,13 +60,13 @@ export function AppleSections() {
         id="smart-home"
         height="168vh"
         canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 1.5, 6]}>
+          <SectionCanvas align="right" opaque camera={[0.6, 1.5, 6]}>
             <SceneRunner getProgress={getProgress} Scene={SmartHomeScene} />
           </SectionCanvas>
         )}
       >
         {(p) => (
-          <SectionContent>
+          <SectionContent split>
             <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Smart Home</SectionEyebrow>
               <SectionTitle>Your home. Connected.</SectionTitle>
@@ -99,13 +99,13 @@ export function AppleSections() {
         theme="dark"
         height="172vh"
         canvas={(getProgress) => (
-          <SectionCanvas bg="#000" camera={[0, 1.8, 7]}>
+          <SectionCanvas align="right" bg="#000" opaque camera={[0.5, 1.8, 7]}>
             <SceneRunner getProgress={getProgress} Scene={IndustrialScene} />
           </SectionCanvas>
         )}
       >
         {(p) => (
-          <SectionContent>
+          <SectionContent split>
             <FadeBlock progress={p} start={0.04} end={0.16}>
               <SectionEyebrow dark>Industrial IoT</SectionEyebrow>
               <SectionTitle dark>Built for the factory floor.</SectionTitle>
@@ -160,13 +160,13 @@ export function AppleSections() {
         id="agriculture"
         height="165vh"
         canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 2, 7]}>
+          <SectionCanvas align="right" opaque camera={[0.5, 2, 7]}>
             <SceneRunner getProgress={getProgress} Scene={AgricultureScene} />
           </SectionCanvas>
         )}
       >
         {(p) => (
-          <SectionContent>
+          <SectionContent split>
             <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Agriculture IoT</SectionEyebrow>
               <SectionTitle>Crops that communicate.</SectionTitle>
@@ -209,7 +209,7 @@ export function AppleSections() {
               </SectionBody>
             </FadeBlock>
             <FadeBlock progress={p} start={0.38} end={0.52} className="mt-8">
-              <p className="font-mono text-5xl font-semibold tabular-nums text-white md:text-7xl">
+              <p className="font-mono text-4xl font-semibold tabular-nums text-white sm:text-5xl md:text-6xl lg:text-7xl">
                 {Math.round(phase(p, 0.22, 0.8) * 100)}%
               </p>
               <p className="mt-2 text-sm text-[#86868b]">Sensor mesh coverage</p>
@@ -223,13 +223,13 @@ export function AppleSections() {
         id="healthcare"
         height="165vh"
         canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 1.2, 6]}>
+          <SectionCanvas align="right" opaque camera={[0.5, 1.2, 6]}>
             <SceneRunner getProgress={getProgress} Scene={HealthcareScene} />
           </SectionCanvas>
         )}
       >
         {(p) => (
-          <SectionContent>
+          <SectionContent split>
             <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Healthcare IoT</SectionEyebrow>
               <SectionTitle>Care that never sleeps.</SectionTitle>
@@ -271,15 +271,15 @@ export function AppleSections() {
                 Traffic signals cycle, air sensors deploy, cameras mount, and LoRa antennas link — urban IoT built for scale.
               </SectionBody>
             </FadeBlock>
-            <FadeBlock progress={p} start={0.38} end={0.54} className="mt-8 flex flex-wrap justify-center gap-6 sm:gap-8">
+            <FadeBlock progress={p} start={0.38} end={0.54} className="mt-6 flex flex-wrap justify-center gap-4 sm:mt-8 sm:gap-6 md:gap-8">
               {[
                 { label: "Traffic", done: phase(p, 0.18, 0.45) },
                 { label: "Air quality", done: phase(p, 0.4, 0.65) },
                 { label: "Data flow", done: phase(p, 0.7, 0.95) },
               ].map(({ label, done }) => (
                 <div key={label}>
-                  <p className="text-2xl font-semibold text-white">{done > 0.8 ? "●" : "○"}</p>
-                  <p className="mt-1 text-xs text-[#86868b]">{label}</p>
+                  <p className="text-xl font-semibold text-white sm:text-2xl">{done > 0.8 ? "●" : "○"}</p>
+                  <p className="mt-1 text-[10px] text-[#86868b] sm:text-xs">{label}</p>
                 </div>
               ))}
             </FadeBlock>
@@ -297,13 +297,13 @@ export function AppleSections() {
         id="edge-ml"
         height="168vh"
         canvas={(getProgress) => (
-          <SectionCanvas camera={[0, 1.2, 6]}>
+          <SectionCanvas align="right" opaque camera={[0.5, 1.2, 6]}>
             <SceneRunner getProgress={getProgress} Scene={EdgeMLScene} />
           </SectionCanvas>
         )}
       >
         {(p) => (
-          <SectionContent>
+          <SectionContent split>
             <FadeBlock progress={p} start={0.04} end={0.18}>
               <SectionEyebrow>Edge ML</SectionEyebrow>
               <SectionTitle>Inference where it matters.</SectionTitle>
@@ -326,7 +326,7 @@ export function AppleSections() {
       </StickySection>
 
       {/* AI Agents - text only section, Apple style */}
-      <section id="ai-agents" className="bg-black px-6 py-32 text-center md:px-16 lg:py-44">
+      <section id="ai-agents" className="bg-black px-4 py-20 text-center sm:px-6 sm:py-28 md:px-12 md:py-32 lg:px-16 lg:py-44 xl:px-20">
         <SectionEyebrow dark>AI Agents</SectionEyebrow>
         <SectionTitle dark>
           Software that
@@ -336,9 +336,9 @@ export function AppleSections() {
         <SectionBody dark>
           Autonomous agents monitor streams, branch on conditions, and dispatch actions — like assembly code with intent.
         </SectionBody>
-        <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-2xl border border-[#424245] bg-[#1d1d1f] text-left">
-          <div className="border-b border-[#424245] px-4 py-2 text-xs text-[#86868b]">agent.runtime</div>
-          <pre className="overflow-x-auto p-6 font-mono text-xs leading-relaxed text-[#a1a1a6] md:text-sm">
+        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[#424245] bg-[#1d1d1f] text-left sm:mt-12 md:mt-16">
+          <div className="border-b border-[#424245] px-3 py-2 text-[10px] text-[#86868b] sm:px-4 sm:text-xs">agent.runtime</div>
+          <pre className="overflow-x-auto p-4 font-mono text-[11px] leading-relaxed text-[#a1a1a6] sm:p-6 sm:text-xs md:text-sm">
 {`if (sensor.temp > threshold) {
   agent.dispatch("cooling", { zone: 3 });
 } else if (anomaly.score > 0.92) {
@@ -353,7 +353,7 @@ export function AppleSections() {
       <PlaygroundSection />
 
       {/* CTA */}
-      <section id="contact" className="bg-[#f5f5f7] px-6 py-32 text-center md:py-44">
+      <section id="contact" className="bg-[#f5f5f7] px-4 py-20 text-center sm:px-6 sm:py-28 md:px-12 md:py-36 lg:px-16 lg:py-44 xl:px-20">
         <SectionEyebrow>Get started</SectionEyebrow>
         <SectionTitle>
           Ready to build
@@ -363,7 +363,7 @@ export function AppleSections() {
         <SectionBody>
           From smart homes to factory floors to autonomous fleets — we engineer the full IoT and AI stack.
         </SectionBody>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
           <a
             href="mailto:hello@nexedge.io"
             className="rounded-full bg-[#0071e3] px-8 py-3 text-sm font-medium text-white transition-opacity hover:opacity-85"
@@ -377,7 +377,7 @@ export function AppleSections() {
             Learn more
           </a>
         </div>
-        <p className="mt-20 text-xs text-[#86868b]">© 2026 NexEdge Systems. All rights reserved.</p>
+        <p className="mt-12 text-[10px] text-[#86868b] sm:mt-16 sm:text-xs md:mt-20">© 2026 NexEdge Systems. All rights reserved.</p>
       </section>
     </>
   );

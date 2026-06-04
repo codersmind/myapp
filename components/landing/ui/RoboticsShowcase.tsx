@@ -30,7 +30,7 @@ function ArmDiagram({ progress }: { progress: number }) {
         viewBox="-50 -150 480 430"
         preserveAspectRatio="xMidYMid meet"
         overflow="visible"
-        className="relative z-30 h-[300px] w-full max-w-[420px] overflow-visible sm:h-[320px] md:h-[360px] md:max-w-[460px]"
+        className="relative z-30 h-[240px] w-full max-w-[420px] overflow-visible sm:h-[280px] sm:max-w-[440px] md:h-[320px] md:max-w-[460px] lg:h-[360px]"
         aria-hidden
       >
         <defs>
@@ -179,7 +179,7 @@ function JointValueGrid({ progress }: { progress: number }) {
             i === 4 ? "col-span-2 sm:col-span-1" : ""
           }`}
         >
-          <span className="text-[22px] font-semibold leading-none tracking-tight tabular-nums text-[#1d1d1f] md:text-2xl">
+          <span className="text-lg font-semibold leading-none tracking-tight tabular-nums text-[#1d1d1f] sm:text-xl md:text-2xl">
             {values[joint.key]}
           </span>
           <span className="mt-2 text-[11px] font-medium leading-tight text-[#86868b]">
@@ -232,7 +232,7 @@ function KinematicsCard({ progress }: { progress: number }) {
         </span>
       </div>
 
-      <div className="relative isolate min-h-[300px] overflow-visible sm:min-h-[320px] md:min-h-[360px]">
+      <div className="relative isolate min-h-[240px] overflow-visible sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px]">
         <ArmDiagram progress={progress} />
         <div className="relative z-10 -mt-4 sm:-mt-6">
           <JointValueGrid progress={progress} />
@@ -259,13 +259,13 @@ function KinematicsCard({ progress }: { progress: number }) {
 export function RoboticsShowcase({ progress }: { progress: number }) {
   return (
     <div className="relative z-20 flex h-full min-h-0 w-full flex-col lg:flex-row">
-      <aside className="relative flex w-full shrink-0 flex-col justify-start border-[#d2d2d7]/50 bg-[#f5f5f7] px-6 py-10 sm:px-10 lg:w-[min(480px,44vw)] lg:max-w-[500px] lg:border-r lg:px-12 lg:pt-20 lg:pb-12">
+      <aside className="relative flex w-full shrink-0 flex-col justify-start border-[#d2d2d7]/50 bg-[#f5f5f7] px-4 py-8 sm:px-6 sm:py-10 md:px-8 lg:w-[min(480px,44vw)] lg:max-w-[500px] lg:border-r lg:px-12 lg:pt-20 lg:pb-12 xl:px-14">
         <div className="mx-auto w-full max-w-md lg:mx-0">
-          <p className="text-xs font-semibold tracking-wide text-[#6e6e73] md:text-sm">Robotics</p>
-          <h2 className="mt-2 text-3xl font-semibold leading-[1.08] tracking-tight text-[#1d1d1f] sm:text-4xl lg:text-[2.75rem]">
+          <p className="text-xs font-semibold tracking-wide text-[#6e6e73] sm:text-xs md:text-sm">Robotics</p>
+          <h2 className="mt-2 text-2xl font-semibold leading-[1.08] tracking-tight text-[#1d1d1f] sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl">
             Precision in motion.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-[#6e6e73] md:text-lg">
+          <p className="mt-3 text-sm leading-relaxed text-[#6e6e73] sm:mt-4 sm:text-base md:text-lg">
             Six-axis control with sub-millimeter repeatability. Scroll to run the full pick-and-place
             sequence on the line.
           </p>
@@ -278,7 +278,7 @@ export function RoboticsShowcase({ progress }: { progress: number }) {
         </div>
       </aside>
 
-      <div className="relative flex min-h-[320px] flex-1 items-start justify-center px-4 py-8 sm:px-8 lg:min-h-0 lg:px-10 lg:pt-16 lg:pb-12">
+      <div className="relative flex min-h-[240px] flex-1 items-start justify-center px-4 py-6 sm:min-h-[300px] sm:px-6 sm:py-8 md:min-h-[320px] lg:min-h-0 lg:px-10 lg:pt-16 lg:pb-12 xl:px-12">
         <KinematicsCard progress={progress} />
       </div>
     </div>

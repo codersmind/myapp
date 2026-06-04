@@ -92,8 +92,8 @@ export function SmartHomeScene({ progress }: { progress: number }) {
   return (
     <>
       <StudioLights intensity={0.95} />
-      {/* Apple HomePod-style hub */}
-      <group ref={hubRef} scale={0.45 + hubScale * 0.55} position={[0, 0.35, 0]}>
+      {/* Apple HomePod-style hub — shifted right so it sits in the canvas column on desktop */}
+      <group ref={hubRef} scale={0.45 + hubScale * 0.55} position={[0.85, 0.35, 0]}>
         <mesh castShadow>
           <cylinderGeometry args={[0.45, 0.5, 0.65, 32]} />
           <meshStandardMaterial color="#e8e8ed" metalness={0.75} roughness={0.22} />
@@ -116,7 +116,7 @@ export function SmartHomeScene({ progress }: { progress: number }) {
       {DEVICES.map(({ Component, pos, delay }, i) => {
         const reveal = phase(progress, delay, delay + 0.12);
         const linked = phase(progress, delay + 0.08, delay + 0.22);
-        const origin = new THREE.Vector3(0, 0.5, 0);
+        const origin = new THREE.Vector3(0.85, 0.5, 0);
         const end = new THREE.Vector3(...pos);
         const mid = origin.clone().lerp(end, 0.5);
         mid.y += 0.5;

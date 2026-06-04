@@ -54,7 +54,7 @@ export function StickySection({
     >
       <div className="relative flex w-full flex-col max-lg:min-h-0 lg:sticky lg:top-0 lg:h-[100dvh] lg:max-h-[100svh] lg:overflow-hidden">
         {canvas?.(getProgress)}
-        <div className="relative z-10 flex w-full flex-col max-lg:min-h-0 lg:min-h-0 lg:justify-start">
+        <div className="relative z-20 flex w-full flex-col max-lg:min-h-0 lg:min-h-0 lg:justify-start">
           {children(progress)}
         </div>
       </div>
@@ -65,7 +65,7 @@ export function StickySection({
 export function SectionEyebrow({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <p
-      className={`text-xs font-semibold tracking-wide md:text-sm ${
+      className={`text-xs font-semibold tracking-wide sm:text-xs md:text-sm ${
         dark ? "text-[#86868b]" : "text-[#6e6e73]"
       }`}
     >
@@ -77,7 +77,7 @@ export function SectionEyebrow({ children, dark = false }: { children: React.Rea
 export function SectionTitle({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <h2
-      className={`mt-2 max-w-3xl text-[1.75rem] font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-6xl lg:text-7xl ${
+      className={`mt-2 max-w-3xl text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl ${
         dark ? "text-white" : "text-[#1d1d1f]"
       }`}
     >
@@ -89,7 +89,7 @@ export function SectionTitle({ children, dark = false }: { children: React.React
 export function SectionBody({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <p
-      className={`mt-4 max-w-lg text-base leading-relaxed sm:mt-5 sm:text-lg md:text-xl ${
+      className={`mt-4 max-w-lg text-sm leading-relaxed sm:mt-5 sm:text-base md:text-lg lg:text-xl ${
         dark ? "text-[#a1a1a6]" : "text-[#6e6e73]"
       }`}
     >

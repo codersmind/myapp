@@ -141,7 +141,7 @@ export function EnergyShowcase({ progress }: { progress: number }) {
   const gridOk = phase(progress, 0.5, 0.7) > 0.5;
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-start lg:py-12">
+    <div className="relative flex min-h-0 flex-1 flex-col md:flex-row md:items-start md:gap-8 lg:py-12 xl:gap-12">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -150,14 +150,14 @@ export function EnergyShowcase({ progress }: { progress: number }) {
         aria-hidden
       />
 
-      <div className="relative z-10 flex flex-1 flex-col justify-start px-6 py-14 md:px-12 lg:max-w-md lg:pt-16 lg:pb-8 lg:pl-16">
-        <p className="text-xs font-semibold text-[#6e6e73] md:text-sm">Energy IoT</p>
-        <h2 className="mt-2 text-4xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-6xl">
+      <div className="relative z-10 flex flex-1 flex-col justify-start px-4 py-10 sm:px-6 sm:py-12 md:px-10 md:py-14 lg:max-w-md lg:pt-16 lg:pb-8 lg:pl-16 xl:pl-20">
+        <p className="text-xs font-semibold text-[#6e6e73] sm:text-xs md:text-sm">Energy IoT</p>
+        <h2 className="mt-2 text-3xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.5rem]">
           Power,
           <br />
           measured.
         </h2>
-        <p className="mt-5 text-lg leading-relaxed text-[#6e6e73] md:text-xl">
+        <p className="mt-4 text-base leading-relaxed text-[#6e6e73] sm:mt-5 sm:text-lg md:text-xl">
           Solar, grid, metering, and storage — unified at the edge with standards-based telemetry and live kWh analytics.
         </p>
 
@@ -185,8 +185,8 @@ export function EnergyShowcase({ progress }: { progress: number }) {
         </ul>
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col items-center px-6 pb-14 lg:px-12 lg:pb-0 lg:pr-16">
-        <div className="w-full max-w-xl rounded-3xl border border-[#d2d2d7]/50 bg-white/95 p-6 shadow-xl shadow-black/[0.06] backdrop-blur-sm md:p-8">
+      <div className="relative z-10 flex flex-1 flex-col items-center px-4 pb-10 sm:px-6 sm:pb-12 md:px-10 md:pb-14 lg:px-12 lg:pb-0 lg:pr-16 xl:pr-20">
+        <div className="w-full max-w-xl rounded-3xl border border-[#d2d2d7]/50 bg-white/95 p-4 shadow-xl shadow-black/[0.06] backdrop-blur-sm sm:p-6 md:p-8">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#6e6e73]">
               Edge energy hub
@@ -217,7 +217,7 @@ export function EnergyShowcase({ progress }: { progress: number }) {
           </div>
         </div>
 
-        <div className="mt-6 grid w-full max-w-xl grid-cols-3 gap-3">
+        <div className="mt-4 grid w-full max-w-xl grid-cols-1 gap-2 sm:mt-6 sm:grid-cols-3 sm:gap-3">
           {[
             { label: "Generation", value: `${solarKw} kW`, sub: "solar now" },
             { label: "Consumption", value: `${Math.round(solarKw * 0.7 * 10) / 10} kW`, sub: "site load" },
@@ -225,10 +225,10 @@ export function EnergyShowcase({ progress }: { progress: number }) {
           ].map((m) => (
             <div
               key={m.label}
-              className="rounded-2xl border border-[#d2d2d7]/40 bg-white/90 px-4 py-4 text-center shadow-sm"
+              className="rounded-2xl border border-[#d2d2d7]/40 bg-white/90 px-3 py-3 text-center shadow-sm sm:px-4 sm:py-4"
             >
-              <p className="text-[10px] font-medium uppercase tracking-wide text-[#86868b]">{m.label}</p>
-              <p className="mt-1 text-xl font-semibold tabular-nums text-[#1d1d1f]">{m.value}</p>
+              <p className="text-[10px] font-medium uppercase tracking-wide text-[#86868b] sm:text-[11px]">{m.label}</p>
+              <p className="mt-1 text-lg font-semibold tabular-nums text-[#1d1d1f] sm:text-xl">{m.value}</p>
               <p className="mt-0.5 text-[10px] text-[#86868b]">{m.sub}</p>
             </div>
           ))}

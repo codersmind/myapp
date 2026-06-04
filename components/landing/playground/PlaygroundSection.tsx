@@ -29,16 +29,16 @@ export function PlaygroundSection() {
   return (
     <section
       id="playground"
-      className="relative scroll-mt-20 border-t border-[#d2d2d7]/50 bg-[#f5f5f7] px-4 py-20 sm:px-6 md:py-28 lg:px-10"
+      className="relative scroll-mt-20 border-t border-[#d2d2d7]/50 bg-[#f5f5f7] px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-10 lg:py-28 xl:px-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl xl:max-w-7xl">
         <p className="text-center text-xs font-semibold tracking-wide text-[#6e6e73] md:text-sm">
           IoT Playground
         </p>
-        <h2 className="mt-2 text-center text-4xl font-semibold tracking-tight text-[#1d1d1f] md:text-5xl">
+        <h2 className="mt-2 text-center text-3xl font-semibold tracking-tight text-[#1d1d1f] sm:text-4xl md:text-5xl lg:text-[2.75rem]">
           Write code. Run the simulation.
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-[#6e6e73] md:text-lg">
+        <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-[#6e6e73] sm:mt-4 sm:text-base md:text-lg">
           Three edge-device examples — edit simple IoT-style scripts, press Run, and watch the
           hardware respond. Customize the OLED live or tune relay logic without flashing firmware.
         </p>

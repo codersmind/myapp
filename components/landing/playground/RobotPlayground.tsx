@@ -81,7 +81,7 @@ export function RobotPlayground() {
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_minmax(360px,580px)]">
+    <div className="grid gap-4 sm:gap-6 lg:grid-cols-2 xl:grid-cols-[1fr_minmax(340px,580px)] xl:gap-8">
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
           <button
@@ -125,7 +125,7 @@ export function RobotPlayground() {
               <summary className="cursor-pointer font-semibold text-[#1d1d1f]">
                 Servo API reference
               </summary>
-              <ul className="mt-3 space-y-1.5 font-mono text-[11px] text-[#48484a]">
+              <ul className="mt-3 space-y-1.5 font-mono text-[10px] text-[#48484a] sm:text-[11px]">
                 <li className="rounded-lg bg-[#f5f5f7] px-2 py-1">angleBase / angleShoulder / angleElbow</li>
                 <li className="rounded-lg bg-[#f5f5f7] px-2 py-1">servoBase.write(0–180)</li>
                 <li className="rounded-lg bg-[#f5f5f7] px-2 py-1">gripClosed = 0 | 1</li>
@@ -153,7 +153,7 @@ export function RobotPlayground() {
         )}
       </div>
 
-      <div className="flex min-h-[420px] items-center justify-center rounded-2xl border border-[#d2d2d7]/60 bg-white p-8 shadow-sm xl:sticky xl:top-24">
+      <div className="flex min-h-[260px] items-center justify-center rounded-2xl border border-[#d2d2d7]/60 bg-white p-4 shadow-sm sm:min-h-[320px] sm:p-6 md:min-h-[380px] md:p-8 lg:sticky lg:top-24 xl:min-h-[420px]">
         <RobotArmPreview state={state} />
       </div>
     </div>

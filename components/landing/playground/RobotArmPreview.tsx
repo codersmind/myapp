@@ -9,7 +9,7 @@ export function RobotArmPreview({ state }: { state: RobotSimState }) {
     <div className="flex flex-col items-center gap-4">
       <svg
         viewBox="-50 -220 480 460"
-        className="h-[min(52vh,480px)] w-full min-h-[360px] max-w-[560px]"
+        className="h-[min(48vh,420px)] w-full min-h-[220px] max-h-[480px] max-w-[560px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px]"
         aria-label="Robot arm simulation preview"
       >
         <defs>
@@ -54,7 +54,7 @@ export function RobotArmPreview({ state }: { state: RobotSimState }) {
           </g>
         </g>
       </svg>
-      <dl className="grid w-full max-w-sm grid-cols-4 gap-2 text-center">
+      <dl className="grid w-full max-w-sm grid-cols-2 gap-2 text-center sm:grid-cols-4">
         {(["j1", "j2", "j3"] as const).map((k) => (
           <div key={k} className="rounded-xl bg-[#f5f5f7] px-2 py-2">
             <dt className="text-[10px] uppercase text-[#86868b]">{k}</dt>

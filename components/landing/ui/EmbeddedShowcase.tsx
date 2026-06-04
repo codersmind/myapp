@@ -75,7 +75,7 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
   const flash = phase(progress, 0.28, 0.55) > 0.4;
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col lg:flex-row lg:items-start lg:gap-12 lg:py-12">
+    <div className="relative flex min-h-0 flex-1 flex-col md:flex-row md:items-start md:gap-8 lg:gap-12 lg:py-12 xl:gap-16">
       {/* Subtle background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -89,14 +89,14 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
       />
 
       {/* Copy — left on desktop */}
-      <div className="relative z-10 flex flex-1 flex-col justify-start px-6 py-14 md:px-12 lg:max-w-lg lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-0">
-        <p className="text-xs font-semibold text-[#6e6e73] md:text-sm">Embedded Systems</p>
-        <h2 className="mt-2 text-4xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] md:text-5xl lg:text-6xl">
+      <div className="relative z-10 flex flex-1 flex-col justify-start px-4 py-10 sm:px-6 sm:py-12 md:px-10 md:py-14 lg:max-w-lg lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-0 xl:pl-20">
+        <p className="text-xs font-semibold text-[#6e6e73] sm:text-xs md:text-sm">Embedded Systems</p>
+        <h2 className="mt-2 text-3xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.5rem]">
           Real hardware.
           <br />
           Real firmware.
         </h2>
-        <p className="mt-5 max-w-md text-lg leading-relaxed text-[#6e6e73] md:text-xl">
+        <p className="mt-4 max-w-md text-base leading-relaxed text-[#6e6e73] sm:mt-5 sm:text-lg md:text-xl">
           Production-ready ESP32 platforms — from pin-mapped GPIO to OTA updates and secure edge connectivity.
         </p>
 
@@ -125,8 +125,8 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
       </div>
 
       {/* Visual — right */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-start px-6 pb-14 lg:px-12 lg:pb-8 lg:pr-16 lg:pt-8">
-        <div className="w-full max-w-lg rounded-3xl border border-[#d2d2d7]/60 bg-white/90 p-8 shadow-xl shadow-black/[0.06] backdrop-blur-sm md:p-10">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-start px-4 pb-10 sm:px-6 sm:pb-12 md:px-10 md:pb-14 lg:px-12 lg:pb-8 lg:pr-16 lg:pt-8 xl:pr-20">
+        <div className="w-full max-w-lg rounded-3xl border border-[#d2d2d7]/60 bg-white/90 p-4 shadow-xl shadow-black/[0.06] backdrop-blur-sm sm:p-6 md:p-8 lg:p-10">
           <div className="mb-6 flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#6e6e73]">ESP32 DevKit</span>
             <span
@@ -142,7 +142,7 @@ export function EmbeddedShowcase({ progress }: { progress: number }) {
             <BoardSvg flashOn={flash} />
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-6 sm:gap-3 md:grid-cols-4">
             {SPECS.map((item) => (
               <div key={item.label} className="rounded-xl bg-[#f5f5f7] px-3 py-3 text-center md:text-left">
                 <p className="text-[10px] font-medium uppercase tracking-wide text-[#86868b]">{item.label}</p>

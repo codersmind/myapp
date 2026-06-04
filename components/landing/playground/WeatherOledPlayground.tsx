@@ -119,7 +119,7 @@ export function WeatherOledPlayground() {
   }, [mode, state, paintBuf]);
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_minmax(280px,360px)]">
+    <div className="grid gap-4 sm:gap-6 lg:grid-cols-2 xl:grid-cols-[1fr_minmax(280px,360px)] xl:gap-8">
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
           <button
@@ -190,7 +190,7 @@ export function WeatherOledPlayground() {
             <p className="mt-1 text-xs text-[#86868b]">
               Draw graphics, then export as Arduino <code className="text-[#1d1d1f]">setup()</code> code.
             </p>
-            <div className="mt-4 max-h-[420px] overflow-auto">
+            <div className="mt-4 max-h-[50vh] overflow-auto sm:max-h-[420px]">
               <OledPixelEditor buffer={paintBuf} onChange={setPaintBuf} />
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -213,7 +213,7 @@ export function WeatherOledPlayground() {
         )}
       </div>
 
-      <div className="flex items-start justify-center rounded-2xl border border-[#d2d2d7]/60 bg-[#f5f5f7] p-6 xl:sticky xl:top-24">
+      <div className="flex items-start justify-center rounded-2xl border border-[#d2d2d7]/60 bg-[#f5f5f7] p-4 sm:p-6 lg:sticky lg:top-24 xl:p-8">
         <OledDisplay state={previewState} />
       </div>
     </div>

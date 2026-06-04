@@ -50,14 +50,14 @@ export function OledDisplay({ state }: OledDisplayProps) {
   return (
     <div className="flex flex-col items-center gap-4">
       <div
-        className="relative rounded-xl border-4 border-[#2d2d2f] bg-[#1d1d1f] p-3 shadow-2xl"
+        className="relative w-full max-w-[256px] rounded-xl border-4 border-[#2d2d2f] bg-[#1d1d1f] p-2 shadow-2xl sm:max-w-none sm:p-3"
         style={{ boxShadow: "inset 0 0 24px rgba(0,0,0,0.6), 0 12px 40px rgba(0,0,0,0.15)" }}
       >
         <div className="relative overflow-hidden rounded-sm">
           <canvas
             ref={canvasRef}
-            className="block"
-            style={{ width: OLED_W * 2, height: OLED_H * 2, imageRendering: "pixelated" }}
+            className="block h-auto w-full max-w-[256px] sm:max-w-none"
+            style={{ maxWidth: OLED_W * 2, aspectRatio: `${OLED_W} / ${OLED_H}`, imageRendering: "pixelated" }}
             aria-label="OLED 128 by 64 simulation"
           />
           <div

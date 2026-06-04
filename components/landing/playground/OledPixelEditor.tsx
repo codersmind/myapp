@@ -102,8 +102,8 @@ export function OledPixelEditor({ buffer, onChange }: OledPixelEditorProps) {
         ref={canvasRef}
         width={OLED_W * SCALE}
         height={OLED_H * SCALE}
-        className="cursor-crosshair rounded-lg border border-[#d2d2d7] bg-[#0a0a0c]"
-        style={{ width: OLED_W * SCALE, height: OLED_H * SCALE, imageRendering: "pixelated" }}
+        className="max-w-full cursor-crosshair rounded-lg border border-[#d2d2d7] bg-[#0a0a0c]"
+        style={{ width: "100%", maxWidth: OLED_W * SCALE, height: "auto", aspectRatio: `${OLED_W} / ${OLED_H}`, imageRendering: "pixelated" }}
         onPointerDown={(e) => {
           setDrawing(true);
           drawOn.current = e.button !== 2;

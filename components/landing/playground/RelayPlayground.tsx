@@ -47,7 +47,7 @@ export function RelayPlayground() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+    <div className="grid gap-4 sm:gap-6 md:grid-cols-2 md:gap-8">
       <CodePanel
         title="relay_control.ino"
         hint="// temperature, threshold, relay, fan_speed, alert_msg"
@@ -63,7 +63,7 @@ export function RelayPlayground() {
         error={error}
         log={log}
       />
-      <div className="flex flex-col gap-4 rounded-2xl border border-[#d2d2d7]/60 bg-white p-6 shadow-sm">
+      <div className="flex flex-col gap-4 rounded-2xl border border-[#d2d2d7]/60 bg-white p-4 shadow-sm sm:p-6">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#6e6e73]">
             Edge relay simulator
@@ -80,14 +80,14 @@ export function RelayPlayground() {
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-xl bg-[#f5f5f7] p-4 text-center">
             <p className="text-[10px] uppercase text-[#86868b]">Temperature</p>
-            <p className="mt-1 font-mono text-3xl font-semibold tabular-nums text-[#1d1d1f]">
+            <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-[#1d1d1f] sm:text-3xl">
               {state.temperature}
               <span className="text-lg text-[#6e6e73]">°C</span>
             </p>
           </div>
           <div className="rounded-xl bg-[#f5f5f7] p-4 text-center">
             <p className="text-[10px] uppercase text-[#86868b]">Humidity</p>
-            <p className="mt-1 font-mono text-3xl font-semibold tabular-nums text-[#1d1d1f]">
+            <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-[#1d1d1f] sm:text-3xl">
               {state.humidity}
               <span className="text-lg text-[#6e6e73]">%</span>
             </p>
@@ -117,7 +117,7 @@ export function RelayPlayground() {
         {/* Relay + fan visual */}
         <div className="flex items-center gap-6">
           <div
-            className={`flex h-24 w-24 flex-col items-center justify-center rounded-2xl border-2 transition-all duration-300 ${
+            className={`flex h-20 w-20 flex-col items-center justify-center rounded-2xl border-2 transition-all duration-300 sm:h-24 sm:w-24 ${
               state.relayOn
                 ? "border-[#ff3b30] bg-[#ff3b30]/10 shadow-[0_0_24px_rgba(255,59,48,0.25)]"
                 : "border-[#d2d2d7] bg-[#f5f5f7]"

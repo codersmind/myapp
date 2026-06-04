@@ -22,8 +22,8 @@ export function CodePanel({
   log,
 }: CodePanelProps) {
   return (
-    <div className="flex h-full min-h-[360px] flex-col rounded-2xl border border-[#d2d2d7]/70 bg-[#1d1d1f] shadow-inner">
-      <div className="flex items-center justify-between gap-2 border-b border-white/10 px-4 py-3">
+    <div className="flex h-full min-h-[240px] flex-col rounded-2xl border border-[#d2d2d7]/70 bg-[#1d1d1f] shadow-inner sm:min-h-[300px] md:min-h-[360px]">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 px-3 py-2.5 sm:px-4 sm:py-3">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -52,7 +52,7 @@ export function CodePanel({
         value={code}
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
-        className="min-h-[200px] flex-1 resize-none bg-transparent px-4 py-3 font-mono text-[13px] leading-relaxed text-[#f5f5f7] outline-none placeholder:text-[#48484a]"
+        className="min-h-[140px] flex-1 resize-none bg-transparent px-3 py-2.5 font-mono text-xs leading-relaxed text-[#f5f5f7] outline-none placeholder:text-[#48484a] sm:min-h-[180px] sm:px-4 sm:py-3 sm:text-[13px] md:min-h-[200px]"
         aria-label="IoT simulation code"
       />
       <div className="border-t border-white/10 px-4 py-2 font-mono text-[11px]">

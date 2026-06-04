@@ -43,15 +43,15 @@ export function HeroQuantumSection() {
     <div
       ref={ref}
       id="hero"
-      style={{ height: "118vh", contentVisibility: "auto" }}
-      className="relative bg-[#f5f5f7] text-[#1d1d1f]"
+      style={{ contentVisibility: "auto" }}
+      className="relative min-h-[100svh] bg-[#f5f5f7] text-[#1d1d1f] md:min-h-[105svh] lg:h-[118vh]"
     >
       <div className="relative flex min-h-[100svh] w-full flex-col overflow-hidden">
         <HeroAppleBackdrop progress={progress} />
 
         {/* Copy — always visible on load (no scroll-gated FadeBlock) */}
         <div
-          className="relative z-20 shrink-0 px-6 pt-24 text-center md:px-12 md:pt-28"
+          className="relative z-20 shrink-0 px-4 pt-20 text-center sm:px-6 sm:pt-24 md:px-12 md:pt-28 lg:px-16 xl:px-20"
           style={{
             opacity: 1 - scrollOut * 0.85,
             transform: `translate3d(0, ${scrollOut * -12}px, 0)`,
@@ -62,7 +62,7 @@ export function HeroQuantumSection() {
           </div>
 
           <h1
-            className="hero-fade-in mx-auto mt-3 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] md:text-6xl lg:text-[4.25rem]"
+            className="hero-fade-in mx-auto mt-3 max-w-4xl text-3xl font-semibold leading-[1.05] tracking-tight text-[#1d1d1f] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.25rem]"
             style={{ animationDelay: "0.12s" }}
           >
             Intelligence at
@@ -71,7 +71,7 @@ export function HeroQuantumSection() {
           </h1>
 
           <p
-            className="hero-fade-in mx-auto mt-5 max-w-xl text-base leading-relaxed text-[#6e6e73] md:text-xl"
+            className="hero-fade-in mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#6e6e73] sm:mt-5 sm:text-base md:text-lg lg:text-xl"
             style={{ animationDelay: "0.2s" }}
           >
             NexEdge builds quantum-ready edge systems — connected devices, on-device ML, and autonomous AI agents from silicon to cloud.
@@ -95,7 +95,7 @@ export function HeroQuantumSection() {
 
         {/* 3D — dedicated band so it reads large, not lost in whitespace */}
         <div
-          className="relative z-0 mx-auto w-full flex-1 min-h-[42vh] max-h-[52vh] md:min-h-[46vh]"
+          className="relative z-0 mx-auto w-full flex-1 min-h-[34vh] max-h-[46vh] sm:min-h-[38vh] sm:max-h-[50vh] md:min-h-[42vh] md:max-h-[52vh] lg:min-h-[46vh]"
           style={{ opacity: 1 - scrollOut * 0.5 }}
         >
           <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#f5f5f7] to-transparent" />
@@ -112,17 +112,17 @@ export function HeroQuantumSection() {
 
         {/* Specs + status — visible immediately */}
         <div
-          className="relative z-20 shrink-0 px-4 pb-10 md:px-8"
+          className="relative z-20 shrink-0 px-4 pb-8 sm:px-6 sm:pb-10 md:px-10 md:pb-12 lg:px-16 xl:px-20"
           style={{
             opacity: 1 - scrollOut,
             transform: `translate3d(0, ${scrollOut * 16}px, 0)`,
           }}
         >
-          <div className="hero-fade-in mx-auto grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[#d2d2d7]/60 shadow-sm md:grid-cols-4" style={{ animationDelay: "0.35s" }}>
+          <div className="hero-fade-in mx-auto grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[#d2d2d7]/60 shadow-sm sm:grid-cols-2 md:grid-cols-4" style={{ animationDelay: "0.35s" }}>
             {HERO_SPECS.map((item) => (
-              <div key={item.label} className="bg-white px-4 py-3 md:px-5 md:py-4">
-                <p className="text-[11px] text-[#6e6e73] md:text-xs">{item.label}</p>
-                <p className="mt-1 text-sm font-semibold text-[#1d1d1f] md:text-base">{item.value}</p>
+              <div key={item.label} className="bg-white px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-4">
+                <p className="text-[10px] text-[#6e6e73] sm:text-[11px] md:text-xs">{item.label}</p>
+                <p className="mt-0.5 text-xs font-semibold text-[#1d1d1f] sm:mt-1 sm:text-sm md:text-base">{item.value}</p>
               </div>
             ))}
           </div>

@@ -22,16 +22,21 @@ function SectionCanvasInner({
   opaque = false,
   align = "full",
 }: SectionCanvasProps) {
+  const mobileBand =
+    "relative z-0 shrink-0 [contain:strict] " +
+    "h-[min(38vh,300px)] min-h-[200px] sm:h-[min(40vh,340px)] sm:min-h-[240px] md:min-h-[280px] lg:h-auto lg:min-h-0 lg:z-0";
+
   const wrapClass =
     align === "right"
-      ? "pointer-events-none absolute inset-y-0 right-0 left-[36%] sm:left-[38%] lg:left-[42%] [contain:strict]"
-      : "pointer-events-none absolute inset-0 [contain:strict]";
+      ? `${mobileBand} pointer-events-none lg:absolute lg:inset-y-0 lg:right-0 lg:left-[36%] xl:left-[40%] 2xl:left-[42%]`
+      : `${mobileBand} pointer-events-none lg:absolute lg:inset-0`;
 
   return (
     <div className={wrapClass} style={{ background: opaque ? bg : undefined }}>
       {align === "right" && (
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-16 bg-gradient-to-r from-[#f5f5f7] to-transparent sm:w-24"
+          className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-12 bg-gradient-to-r from-[var(--canvas-fade,#f5f5f7)] to-transparent sm:w-16 md:block lg:w-24"
+          style={{ ["--canvas-fade" as string]: bg }}
           aria-hidden
         />
       )}
